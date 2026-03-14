@@ -76,19 +76,15 @@ def lcs_memoization(seq1, seq2):
     cache = {}
 
     def helper(i, j):
-        # Base case: one sequence is empty
         if i == 0 or j == 0:
             return 0
 
-        # Return cached result if already computed
         if (i, j) in cache:
             return cache[(i, j)]
 
-        # If characters match, move diagonally
         if seq1[i - 1] == seq2[j - 1]:
             cache[(i, j)] = 1 + helper(i - 1, j - 1)
         else:
-            # Otherwise, take the best of removing one character
             cache[(i, j)] = max(helper(i - 1, j), helper(i, j - 1))
 
         return cache[(i, j)]
@@ -126,10 +122,8 @@ def lcs_tabulation(seq1, seq2):
     m = len(seq1)
     n = len(seq2)
 
-    # Create table of size (m+1) x (n+1) filled with 0
     dp = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
 
-    # Fill table bottom-up
     for i in range(1, m + 1):
         for j in range(1, n + 1):
             if seq1[i - 1] == seq2[j - 1]:
